@@ -1,0 +1,45 @@
+ <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed" rel="stylesheet"> 
+<style type="text/css">
+	div{
+		position: absolute;
+		top: 10%;
+		bottom: 65%;
+		text-align: center;
+		align-content: center;
+		width: 100%;
+		font-size: 1em;
+		font-family: 'Encode Sans Condensed', sans-serif;
+	}
+	form {
+		font-size: 1.7em;
+		font-family: 'Encode Sans Condensed', sans-serif;
+	}
+	body{
+
+		background: #6BCAE2;
+	}
+	.custom{
+		font-family: 'Encode Sans Condensed', sans-serif;
+		width: 300px;
+		height: 30px
+	}
+</style>
+<div>
+<h1>Shorten URL's</h1>
+{% if error_message %}<p><strong style="color:red">{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'short'%}" method="post">
+	{% csrf_token %}
+	URL: <input type="text" name="url" class="custom"><br/><br/>
+	Custom Code: <input type="text" name="short_code" class="custom"><br/><br/>
+	Expiry Time(In Mins): <input type="text" name="expiry_time" class="custom"><br/><br/>
+	Private Token: <input type="text" name="private_token" class="custom"><br/><br/>
+	<input type="submit" value="Submit" />
+</form>
+{% if shortURL %} 
+<span class="custom">
+	Shortened URL: <strong><a href="">{{shortURL}}</a></strong></br></br>
+	Click Info: <strong>{{click_info}}</strong>
+</span>
+{% endif %}
+</div>
